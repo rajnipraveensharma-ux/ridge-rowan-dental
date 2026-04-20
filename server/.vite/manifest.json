@@ -1,0 +1,262 @@
+{
+  "%23tanstack-start-plugin-adapters": {
+    "file": "assets/__23tanstack-start-plugin-adapters-Cwee5PKy.js",
+    "name": "__23tanstack-start-plugin-adapters",
+    "src": "%23tanstack-start-plugin-adapters",
+    "isDynamicEntry": true
+  },
+  "/sessions/intelligent-sharp-knuth/build-dental/src/styles.css": {
+    "file": "assets/styles-t9GGPXC_.css",
+    "src": "/sessions/intelligent-sharp-knuth/build-dental/src/styles.css"
+  },
+  "_CallbackBar-dFFxK-V1.js": {
+    "file": "assets/CallbackBar-dFFxK-V1.js",
+    "name": "CallbackBar",
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "_circle-check-BbPYbHbY.js": {
+    "file": "assets/circle-check-BbPYbHbY.js",
+    "name": "circle-check",
+    "imports": [
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "_clinic-tech-D-AQybv2.js": {
+    "file": "assets/clinic-tech-D-AQybv2.js",
+    "name": "clinic-tech",
+    "assets": [
+      "assets/clinic-tech-DBqnyEqU.jpg"
+    ]
+  },
+  "_implant-BTLw3fXj.js": {
+    "file": "assets/implant-BTLw3fXj.js",
+    "name": "implant",
+    "imports": [
+      "_worker-entry-C0wzGyr4.js"
+    ],
+    "assets": [
+      "assets/implant-WddLTIJt.jpg"
+    ]
+  },
+  "_router-B8TbBoqR.js": {
+    "file": "assets/router-B8TbBoqR.js",
+    "name": "router",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js"
+    ],
+    "dynamicImports": [
+      "src/routes/treatments.tsx?tsr-split=component",
+      "src/routes/reviews.tsx?tsr-split=component",
+      "src/routes/prices.tsx?tsr-split=component",
+      "src/routes/contact.tsx?tsr-split=component",
+      "src/routes/book.tsx?tsr-split=component",
+      "src/routes/blog.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component"
+    ],
+    "assets": [
+      "assets/hero-vallarta-UlgjcTUL.jpg",
+      "assets/styles-t9GGPXC_.css"
+    ]
+  },
+  "_smile-patient-d3jzavr9.js": {
+    "file": "assets/smile-patient-d3jzavr9.js",
+    "name": "smile-patient",
+    "assets": [
+      "assets/veneers-BiU-J7bU.jpg",
+      "assets/all-on-4-gdtlEKSa.jpg",
+      "assets/smile-patient-CC6Zllvi.jpg"
+    ]
+  },
+  "_sparkles-DjU8Uolj.js": {
+    "file": "assets/sparkles-DjU8Uolj.js",
+    "name": "sparkles",
+    "imports": [
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "_star-C4Uko4wv.js": {
+    "file": "assets/star-C4Uko4wv.js",
+    "name": "star",
+    "imports": [
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "_worker-entry-C0wzGyr4.js": {
+    "file": "assets/worker-entry-C0wzGyr4.js",
+    "name": "worker-entry",
+    "dynamicImports": [
+      "tanstack-start-manifest:v",
+      "_router-B8TbBoqR.js",
+      "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+      "%23tanstack-start-plugin-adapters"
+    ]
+  },
+  "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts": {
+    "file": "assets/start-HYkvq4Ni.js",
+    "name": "start",
+    "src": "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+    "isDynamicEntry": true
+  },
+  "src/assets/all-on-4.jpg": {
+    "file": "assets/all-on-4-gdtlEKSa.jpg",
+    "src": "src/assets/all-on-4.jpg"
+  },
+  "src/assets/clinic-tech.jpg": {
+    "file": "assets/clinic-tech-DBqnyEqU.jpg",
+    "src": "src/assets/clinic-tech.jpg"
+  },
+  "src/assets/dentists-procedure.jpg": {
+    "file": "assets/dentists-procedure-CHdkdrla.jpg",
+    "src": "src/assets/dentists-procedure.jpg"
+  },
+  "src/assets/dr-daniela.jpg": {
+    "file": "assets/dr-daniela-UWOA4Hyo.jpg",
+    "src": "src/assets/dr-daniela.jpg"
+  },
+  "src/assets/dr-fidel.jpg": {
+    "file": "assets/dr-fidel-D8K1B5vK.jpg",
+    "src": "src/assets/dr-fidel.jpg"
+  },
+  "src/assets/dr-pamela.jpg": {
+    "file": "assets/dr-pamela-BGFupf9I.jpg",
+    "src": "src/assets/dr-pamela.jpg"
+  },
+  "src/assets/dr-uriel.jpg": {
+    "file": "assets/dr-uriel-DZWHnPKf.jpg",
+    "src": "src/assets/dr-uriel.jpg"
+  },
+  "src/assets/dr-zunet.jpg": {
+    "file": "assets/dr-zunet-C4Owr7fi.jpg",
+    "src": "src/assets/dr-zunet.jpg"
+  },
+  "src/assets/hero-vallarta.jpg": {
+    "file": "assets/hero-vallarta-UlgjcTUL.jpg",
+    "src": "src/assets/hero-vallarta.jpg"
+  },
+  "src/assets/implant.jpg": {
+    "file": "assets/implant-WddLTIJt.jpg",
+    "src": "src/assets/implant.jpg"
+  },
+  "src/assets/smile-patient.jpg": {
+    "file": "assets/smile-patient-CC6Zllvi.jpg",
+    "src": "src/assets/smile-patient.jpg"
+  },
+  "src/assets/veneers.jpg": {
+    "file": "assets/veneers-BiU-J7bU.jpg",
+    "src": "src/assets/veneers.jpg"
+  },
+  "src/routes/blog.tsx?tsr-split=component": {
+    "file": "assets/blog-DQ_SDzGH.js",
+    "name": "blog",
+    "src": "src/routes/blog.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js",
+      "_smile-patient-d3jzavr9.js",
+      "_clinic-tech-D-AQybv2.js"
+    ]
+  },
+  "src/routes/book.tsx?tsr-split=component": {
+    "file": "assets/book-BLeXS7dm.js",
+    "name": "book",
+    "src": "src/routes/book.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js",
+      "_sparkles-DjU8Uolj.js",
+      "_circle-check-BbPYbHbY.js"
+    ]
+  },
+  "src/routes/contact.tsx?tsr-split=component": {
+    "file": "assets/contact-g9x9LUY0.js",
+    "name": "contact",
+    "src": "src/routes/contact.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_circle-check-BbPYbHbY.js",
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-D5nz5HMo.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js",
+      "_smile-patient-d3jzavr9.js",
+      "_clinic-tech-D-AQybv2.js",
+      "_implant-BTLw3fXj.js",
+      "_CallbackBar-dFFxK-V1.js",
+      "_sparkles-DjU8Uolj.js",
+      "_star-C4Uko4wv.js"
+    ],
+    "assets": [
+      "assets/dentists-procedure-CHdkdrla.jpg",
+      "assets/dr-fidel-D8K1B5vK.jpg",
+      "assets/dr-uriel-DZWHnPKf.jpg",
+      "assets/dr-zunet-C4Owr7fi.jpg",
+      "assets/dr-pamela-BGFupf9I.jpg",
+      "assets/dr-daniela-UWOA4Hyo.jpg"
+    ]
+  },
+  "src/routes/prices.tsx?tsr-split=component": {
+    "file": "assets/prices-Cd1l5CGK.js",
+    "name": "prices",
+    "src": "src/routes/prices.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js",
+      "_CallbackBar-dFFxK-V1.js"
+    ]
+  },
+  "src/routes/reviews.tsx?tsr-split=component": {
+    "file": "assets/reviews-IsbLcyCK.js",
+    "name": "reviews",
+    "src": "src/routes/reviews.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_CallbackBar-dFFxK-V1.js",
+      "_star-C4Uko4wv.js",
+      "_router-B8TbBoqR.js"
+    ]
+  },
+  "src/routes/treatments.tsx?tsr-split=component": {
+    "file": "assets/treatments-DeDozGb0.js",
+    "name": "treatments",
+    "src": "src/routes/treatments.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js",
+      "_router-B8TbBoqR.js",
+      "_implant-BTLw3fXj.js",
+      "_CallbackBar-dFFxK-V1.js",
+      "_smile-patient-d3jzavr9.js"
+    ]
+  },
+  "tanstack-start-manifest:v": {
+    "file": "assets/_tanstack-start-manifest_v-BCbxq-1l.js",
+    "name": "_tanstack-start-manifest_v",
+    "src": "tanstack-start-manifest:v",
+    "isDynamicEntry": true
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "_worker-entry-C0wzGyr4.js"
+    ]
+  }
+}
