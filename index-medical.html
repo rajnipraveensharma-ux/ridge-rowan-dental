@@ -435,6 +435,69 @@ footer a:hover{color:var(--accent)}
   .stat{padding:0 16px 0 0}
   .stat+.stat{padding-left:16px;border-left:none;padding-top:12px;border-top:1px solid var(--border)}
 }
+
+/* ── Hamburger Button ── */
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  background:none;border:1px solid rgba(43,156,218,.35);
+  cursor:pointer;padding:9px 10px;border-radius:2px;
+  width:40px;height:40px;flex-shrink:0;
+}
+.nav-hamburger span{
+  display:block;width:18px;height:1.5px;
+  background:var(--white);
+  transition:transform .3s ease, opacity .25s ease;
+  transform-origin:center;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── Mobile Menu Panel ── */
+.mobile-nav{
+  position:fixed;top:64px;left:0;right:0;bottom:0;
+  background:var(--bg);
+  z-index:190;
+  display:none;flex-direction:column;
+  align-items:stretch;
+  border-top:1px solid var(--border);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.mobile-nav.open{display:flex}
+
+.mobile-nav ul{
+  list-style:none;padding:0;margin:0;
+  flex:1;
+}
+.mobile-nav ul li a{
+  display:block;
+  padding:18px 28px;
+  color:var(--text-secondary);
+  text-decoration:none;
+  font-size:13px;font-weight:400;
+  letter-spacing:.08em;text-transform:uppercase;
+  border-bottom:1px solid rgba(43,156,218,.08);
+  transition:color .2s, background .2s;
+}
+.mobile-nav ul li a:hover,
+.mobile-nav ul li a:active{
+  color:var(--white);
+  background:rgba(43,156,218,.05);
+}
+.mobile-nav-footer{
+  padding:24px 28px 40px;
+  border-top:1px solid var(--border);
+}
+.mobile-nav-footer .btn-primary{
+  display:flex;justify-content:center;
+  width:100%;text-align:center;
+}
+
+@media(max-width:768px){
+  .nav-hamburger{display:flex}
+  .nav-btn{display:none}
+}
 </style>
 </head>
 <body>
@@ -456,7 +519,24 @@ footer a:hover{color:var(--accent)}
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-btn"><span>Book Appointment</span></a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Navigation Panel -->
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#home" class="mobile-nav-link">Home</a></li>
+    <li><a href="#services" class="mobile-nav-link">Services</a></li>
+    <li><a href="#technology" class="mobile-nav-link">Technology</a></li>
+    <li><a href="#team" class="mobile-nav-link">Our Team</a></li>
+    <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-footer">
+    <a href="#contact" class="btn-primary mobile-nav-link"><span>Book Appointment →</span></a>
+  </div>
+</div>
 
 <section class="hero" id="home">
   <!-- X-ray image right side -->
@@ -838,97 +918,4 @@ function drawOverlay() {
   // Tick marks
   oc.strokeStyle = 'rgba(43,156,218,0.7)';
   oc.lineWidth = 1.2;
-  oc.beginPath();
-  oc.moveTo(0, scanY);
-  oc.lineTo(12, scanY);
-  oc.stroke();
-  oc.beginPath();
-  oc.moveTo(OW, scanY);
-  oc.lineTo(OW - 12, scanY);
-  oc.stroke();
-
-  // Readout
-  oc.font = '500 7px monospace';
-  oc.fillStyle = 'rgba(43,156,218,0.6)';
-  oc.textAlign = 'left';
-  oc.fillText(`Y:${Math.max(0, Math.round(scanY)).toString().padStart(4, '0')}`, 16, scanY - 6);
-
-  // Vignette overlay
-  const vg = oc.createRadialGradient(OW * 0.5, OH * 0.45, OH * 0.18, OW * 0.5, OH * 0.45, OH * 0.7);
-  vg.addColorStop(0, 'rgba(10,14,26,0)');
-  vg.addColorStop(1, 'rgba(10,14,26,.4)');
-  oc.fillStyle = vg;
-  oc.fillRect(0, 0, OW, OH);
-
-  // Annotations
-  annotations.forEach((a, i) => {
-    const ax = a.rx * OW, ay = a.ry * OH;
-    const phase = Math.sin(T * 0.5 + i * 0.8);
-    const ao = 0.22 + 0.08 * phase;
-    const llen = OW * 0.12;
-    const ex = a.side === 'right' ? ax + llen : ax - llen;
-    const ey = ay;
-
-    oc.beginPath();
-    oc.arc(ax, ay, 2.4, 0, Math.PI * 2);
-    oc.fillStyle = `rgba(43,156,218,${ao * 2.2})`;
-    oc.fill();
-
-    const pr = 5 + 3 * (0.5 + 0.5 * Math.sin(T * 1.1 + i));
-    oc.beginPath();
-    oc.arc(ax, ay, pr, 0, Math.PI * 2);
-    oc.strokeStyle = `rgba(43,156,218,${ao * 0.8})`;
-    oc.lineWidth = 0.7;
-    oc.stroke();
-
-    oc.beginPath();
-    oc.moveTo(ax, ay);
-    oc.lineTo(ex, ey);
-    oc.strokeStyle = `rgba(43,156,218,${ao})`;
-    oc.lineWidth = 0.8;
-    oc.setLineDash([3, 5]);
-    oc.stroke();
-    oc.setLineDash([]);
-
-    oc.beginPath();
-    oc.moveTo(ex, ey - 5);
-    oc.lineTo(ex, ey + 5);
-    oc.strokeStyle = `rgba(43,156,218,${ao * 1.5})`;
-    oc.lineWidth = 0.9;
-    oc.stroke();
-
-    oc.font = `300 8.5px 'DM Sans',sans-serif`;
-    oc.fillStyle = `rgba(43,156,218,${ao * 1.9})`;
-    const txtX = a.side === 'right' ? ex + 7 : ex - 7;
-    oc.textAlign = a.side === 'right' ? 'left' : 'right';
-    oc.fillText(a.label.toUpperCase(), txtX, ey + 3);
-  });
-
-  // HUD text
-  oc.font = "300 7px 'DM Sans',monospace";
-  oc.fillStyle = 'rgba(43,156,218,.2)';
-  oc.textAlign = 'right';
-  oc.fillText(`DENTAL-SCAN · MOLAR-01 · ${(T * 100).toFixed(0).padStart(5, '0')}ms`, OW - 14, OH - 14);
-  oc.textAlign = 'left';
-  oc.fillStyle = 'rgba(43,156,218,.18)';
-  oc.fillText('DR MODE :: DIAGNOSTIC', 14, OH - 14);
-
-  requestAnimationFrame(drawOverlay);
-}
-
-function init() {
-  resizeOv();
-  window.addEventListener('resize', resizeOv);
-  drawOverlay();
-}
-
-if (img.complete) {
-  init();
-} else {
-  img.addEventListener('load', init);
-  img.addEventListener('error', init);
-}
-</script>
-
-</body>
-</html>
+  oc.

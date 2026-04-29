@@ -6,5 +6,5 @@
 /terms-of-service.html /terms-of-service.html 200
 /dental-hero-xray.html /dental-hero-xray.html 200
 
-# Catch-all for SPA routing
-/* /index.html 200
+# Redirect root to main page
+/ /index-medical.h

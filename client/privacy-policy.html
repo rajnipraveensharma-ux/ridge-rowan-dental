@@ -68,6 +68,25 @@ footer a:hover{color:var(--accent)}
   nav .nav-ul{display:none}
   section{padding:80px 24px}
 }
+
+/* ── Hamburger Button ── */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:1px solid rgba(43,156,218,.35);cursor:pointer;padding:9px 10px;border-radius:2px;width:40px;height:40px;flex-shrink:0}
+.nav-hamburger span{display:block;width:18px;height:1.5px;background:var(--white);transition:transform .3s ease, opacity .25s ease;transform-origin:center}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-nav{position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--bg);z-index:190;display:none;flex-direction:column;align-items:stretch;border-top:1px solid var(--border);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.mobile-nav.open{display:flex}
+.mobile-nav ul{list-style:none;padding:0;margin:0;flex:1}
+.mobile-nav ul li a{display:block;padding:18px 28px;color:var(--text-secondary);text-decoration:none;font-size:13px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(43,156,218,.08);transition:color .2s, background .2s}
+.mobile-nav ul li a:hover{color:var(--white);background:rgba(43,156,218,.05)}
+.mobile-nav-footer{padding:24px 28px 40px;border-top:1px solid var(--border)}
+.mobile-nav-footer .btn-primary{display:flex;justify-content:center;width:100%;text-align:center;padding:14px 32px;background:var(--primary);color:var(--bg);font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:2px}
+
+@media(max-width:768px){
+  .nav-hamburger{display:flex}
+  .nav-btn{display:none}
+}
 </style>
 </head>
 <body>
@@ -89,49 +108,13 @@ footer a:hover{color:var(--accent)}
     <li><a href="index-medical.html#contact">Contact</a></li>
   </ul>
   <a href="index-medical.html#contact" class="nav-btn"><span>Book Appointment</span></a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<section>
-  <h1>Privacy Policy</h1>
-  
-  <div class="content">
-    <h2>Introduction</h2>
-    <p>Ridge & Rowan Dental ("we," "us," "our," or "Company") is committed to protecting your privacy. This Privacy Policy explains our online privacy practices and the choices you can make about how your information is used.</p>
-
-    <h2>Information We Collect</h2>
-    <p>We may collect information about you in various ways, including:</p>
-    <ul>
-      <li>Information you provide directly to us through contact forms, appointment requests, or email communications</li>
-      <li>Automatic information collected when you browse our website, such as your IP address and browsing behavior</li>
-      <li>Patient information when you become a client of our dental practice</li>
-    </ul>
-
-    <h2>How We Use Your Information</h2>
-    <p>We use the information we collect for the following purposes:</p>
-    <ul>
-      <li>To provide and improve our dental services</li>
-      <li>To communicate with you about your appointments and treatment</li>
-      <li>To respond to your inquiries and requests</li>
-      <li>To send promotional materials and updates (with your consent)</li>
-      <li>To comply with legal and regulatory requirements</li>
-    </ul>
-
-    <h2>Data Security</h2>
-    <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, disclosure, alteration, and destruction. However, no method of transmission over the Internet is 100% secure.</p>
-
-    <h2>Your Rights</h2>
-    <p>You have the right to access, correct, or delete your personal information. To exercise these rights, please contact us using the information provided on our website.</p>
-
-    <h2>Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us at hello@ridgerowan.dental or call +52 624 143 0000.</p>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2026 Ridge &amp; Rowan Dental. All rights reserved.</p>
-  <p>Boutique cosmetic &amp; restorative dentistry in Los Cabos, Mexico</p>
-  <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
-</footer>
-
-</body>
-</html>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="index-medical.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="index-medical.html#services" class="mobile-nav-link">Services</a></li>
+    <li><a href="index-medical.html#technology" class
