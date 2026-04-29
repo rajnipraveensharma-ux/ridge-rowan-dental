@@ -30,7 +30,7 @@
   --danger: #ef4444;
 }
 
-html,body{width:100%;height:100%;background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;line-height:1.6}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:auto;line-height:1.6}
 
 body{scroll-behavior:smooth}
 
@@ -288,6 +288,9 @@ h3{
   border:1px solid var(--primary);
   border-radius:4px;
   transition:all .3s;
+  text-decoration:none;
+  color:inherit;
+  display:block;
 }
 
 .service-card:hover{
@@ -451,6 +454,7 @@ footer a:hover{color:var(--accent)}
     <span class="logo-wordmark"><b>Ridge</b> & Rowan</span>
   </a>
   <ul class="nav-ul">
+    <li><a href="#home">Home</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#technology">Technology</a></li>
     <li><a href="#team">Our Team</a></li>
@@ -521,16 +525,16 @@ footer a:hover{color:var(--accent)}
   </p>
 
   <div class="services-grid">
-    <div class="service-card">
+    <a href="services-implants.html" class="service-card">
       <div class="service-icon">🦷</div>
       <h3>Dental Implants</h3>
       <p>Restore your smile with state-of-the-art dental implants. Save up to 50% compared to US prices without compromising on quality.</p>
-    </div>
-    <div class="service-card">
+    </a>
+    <a href="services-veneers.html" class="service-card">
       <div class="service-icon">✨</div>
       <h3>Cosmetic Veneers</h3>
       <p>Transform your smile with custom-designed porcelain veneers. Achieve the aesthetic perfection you've always wanted.</p>
-    </div>
+    </a>
     <div class="service-card">
       <div class="service-icon">👁️</div>
       <h3>All-on-4 Restoration</h3>
@@ -702,7 +706,7 @@ footer a:hover{color:var(--accent)}
 <footer>
   <p>&copy; 2026 Ridge &amp; Rowan Dental. All rights reserved.</p>
   <p>Boutique cosmetic &amp; restorative dentistry in Los Cabos, Mexico</p>
-  <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
 </footer>
 
 <!-- Background canvas -->
