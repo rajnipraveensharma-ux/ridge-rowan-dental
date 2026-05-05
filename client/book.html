@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment — Ridge & Rowan Dental</title>
+<meta name="description" content="Schedule your dental appointment at Ridge & Rowan Dental in Los Cabos. Choose your service, pick a time, and book online in minutes.">
+<meta property="og:title" content="Book Appointment — Ridge & Rowan Dental">
+<meta property="og:description" content="Schedule your dental consultation online. Choose your service, pick a time, and book in minutes.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0a0e1a;--bg2:#0f1428;--bg3:#141b33;
+  --primary:#2b9cda;--primary2:#1f7ba8;--primary3:rgba(43,156,218,0.18);--primary4:rgba(43,156,218,0.07);
+  --accent:#00d9a3;--accent2:#00a878;
+  --white:#e8f1f5;
+  --text:rgba(232,241,245,0.95);--text2:rgba(232,241,245,0.65);--text3:rgba(232,241,245,0.35);
+  --border:rgba(43,156,218,0.25);--border2:rgba(43,156,218,0.12);
+  --danger:#ef4444;--warning:#f59e0b;
+  --radius:3px;--radius-lg:6px;
+  --shadow:0 12px 40px rgba(0,0,0,0.3);
+  --transition:0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+html,body{width:100%;min-height:100vh;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* ── Navigation ── */
+nav{
+  position:fixed;inset:0 0 auto;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:linear-gradient(to bottom,rgba(10,14,26,.98),rgba(10,14,26,0));
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border2);
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-symbol{width:32px;height:32px;border:2px solid var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo-symbol svg{width:15px;height:15px;stroke:var(--primary)}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;color:var(--white);letter-spacing:.06em}
+.logo-text b{font-weight:600;color:var(--primary)}
+.nav-back{color:var(--text2);text-decoration:none;font-size:12.5px;letter-spacing:.04em;transition:color var(--transition);display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--white)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor}
+
+/* ── Page Layout ── */
+.page{
+  min-height:100vh;padding-top:68px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.container{width:100%;max-width:780px;padding:48px 32px}
+
+/* ── Progress Bar ── */
+.progress-wrap{margin-bottom:48px}
+.progress-steps{display:flex;justify-content:space-between;position:relative;margin-bottom:12px}
+.progress-steps::before{
+  content:'';position:absolute;top:14px;left:0;right:0;height:2px;
+  background:var(--border2);z-index:0;
+}
+.progress-fill{
+  position:absolute;top:14px;left:0;height:2px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  z-index:1;transition:width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-step{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.step-dot{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;
+  border:2px solid var(--border);
+  background:var(--bg);
+  color:var(--text3);
+  transition:all var(--transition);
+}
+.step-dot.active{border-color:var(--primary);background:var(--primary);color:var(--bg);box-shadow:0 0 18px rgba(43,156,218,.3)}
+.step-dot.done{border-color:var(--accent);background:var(--accent);color:var(--bg)}
+.step-label{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);transition:color var(--transition);white-space:nowrap}
+.step-label.active{color:var(--primary)}
+.step-label.done{color:var(--accent)}
+
+/* ── Step Content ── */
+.step-content{display:none;animation:fadeSlideIn .4s ease}
+.step-content.active{display:block}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.step-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,44px);font-weight:400;
+  color:var(--white);margin-bottom:8px;letter-spacing:-.01em;
+}
+.step-subtitle{font-size:13.5px;color:var(--text2);margin-bottom:36px;line-height:1.7}
+
+/* ── Service Cards ── */
+.service-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.service-option{
+  padding:24px;border:1px solid var(--border);
+  border-radius:var(--radius-lg);cursor:pointer;
+  transition:all var(--transition);
+  background:linear-gradient(135deg,rgba(43,156,218,0.03),rgba(15,20,40,0.3));
+  position:relative;
+}
+.service-option:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 8px 24px rgba(43,156,218,.1)}
+.service-option.selected{border-color:var(--accent);background:linear-gradient(135deg,rgba(0,217,163,0.08),rgba(43,156,218,0.05));box-shadow:0 0 0 3px rgba(0,217,163,.12)}
+.service-option .check{
+  position:absolute;top:12px;right:12px;width:22px;height:22px;
+  border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);opacity:0;transform:scale(.6);
+}
+.service-option.selected .check{opacity:1;transform:scale(1);border-color:var(--accent);background:var(--accent)}
+.service-option.selected .check::after{content:'✓';color:var(--bg);font-size:12px;font-weight:600}
+.service-icon{font-size:28px;margin-bottom:10px}
+.service-name{font-size:15px;font-weight:600;color:var(--white);margin-bottom:4px}
+.service-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.service-duration{font-size:10.5px;color:var(--text3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── Date Picker ── */
+.date-nav{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.date-nav-btn{
+  width:36px;height:36px;border:1px solid var(--border);border-radius:50%;
+  background:transparent;color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);flex-shrink:0;
+}
+.date-nav-btn:hover{border-color:var(--primary);color:var(--primary)}
+.date-nav-btn:disabled{opacity:.25;cursor:not-allowed}
+.date-nav-btn svg{width:16px;height:16px}
+.date-display{flex:1;text-align:center}
+.date-month{font-size:14px;font-weight:600;color:var(--white);letter-spacing:.04em;text-transform:uppercase}
+.date-year{font-size:11px;color:var(--text3);margin-top:2px}
+.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:8px}
+.date-day-label{text-align:center;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;padding:8px 0}
+.date-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border:1px solid transparent;border-radius:50%;
+  font-size:13px;font-weight:500;color:var(--text2);
+  cursor:pointer;transition:all var(--transition);
+  position:relative;
+}
+.date-day:hover:not(.empty):not(.past){border-color:var(--primary);color:var(--white)}
+.date-day.today{border-color:var(--border);color:var(--primary);font-weight:600}
+.date-day.selected{border-color:var(--accent);background:var(--accent);color:var(--bg);font-weight:600}
+.date-day.past{color:var(--text3);cursor:not-allowed;opacity:.4}
+.date-day.empty{cursor:default}
+
+/* ── Time Slots ── */
+.time-section{margin-top:36px}
+.time-section-title{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:14px}
+.time-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.time-slot{
+  padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-lg);
+  text-align:center;font-size:13px;font-weight:500;color:var(--text);
+  cursor:pointer;transition:all var(--transition);
+  background:rgba(43,156,218,0.02);
+}
+.time-slot:hover{border-color:var(--primary);background:rgba(43,156,218,0.06)}
+.time-slot.selected{border-color:var(--accent);background:rgba(0,217,163,0.1);color:var(--accent);font-weight:600}
+.time-slot.unavailable{opacity:.25;cursor:not-allowed;text-decoration:line-through}
+
+/* ── Form Inputs ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2)}
+.form-input{
+  padding:13px 16px;background:rgba(43,156,218,0.04);
+  border:1px solid var(--border);color:var(--text);
+  border-radius:var(--radius-lg);font-family:inherit;font-size:14px;
+  transition:all var(--transition);outline:none;
+}
+.form-input:focus{border-color:var(--primary);background:rgba(43,156,218,0.08);box-shadow:0 0 0 3px rgba(43,156,218,.08)}
+.form-input::placeholder{color:var(--text3)}
+.form-input.error{border-color:var(--danger)}
+.form-error{font-size:11px;color:var(--danger);margin-top:2px;display:none}
+.form-error.visible{display:block}
+.form-textarea{min-height:100px;resize:vertical}
+
+/* ── Summary Card ── */
+.summary-card{
+  padding:32px;background:linear-gradient(135deg,rgba(43,156,218,0.06),rgba(0,217,163,0.04));
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.summary-item{margin-bottom:0}
+.summary-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.summary-value{font-size:14px;font-weight:500;color:var(--white)}
+
+/* ── Confirmation ── */
+.confirmation-wrap{text-align:center;padding:16px 0}
+.confirmation-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  animation:popIn .5s cubic-bezier(0.18,0.89,0.32,1.28);
+}
+@keyframes popIn{
+  0%{transform:scale(0);opacity:0}
+  60%{transform:scale(1.15)}
+  100%{transform:scale(1);opacity:1}
+}
+.confirmation-icon svg{width:36px;height:36px;stroke:var(--bg)}
+.confirmation-details{
+  text-align:left;max-width:440px;margin:32px auto 0;
+  padding:28px;background:rgba(43,156,218,0.04);
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+}
+.conf-detail{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border2)}
+.conf-detail:last-child{border-bottom:none}
+.conf-detail-label{font-size:12px;color:var(--text2)}
+.conf-detail-value{font-size:13px;font-weight:500;color:var(--white)}
+
+/* ── Buttons ── */
+.btn-row{display:flex;gap:12px;margin-top:32px;justify-content:flex-end}
+.btn-back{
+  padding:13px 28px;border:1px solid var(--border);color:var(--text2);
+  font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  background:transparent;border-radius:var(--radius);cursor:pointer;
+  transition:all var(--transition);font-family:inherit;
+}
+.btn-back:hover{border-color:var(--primary);color:var(--white)}
+.btn-next{
+  padding:13px 36px;border:none;color:var(--bg);
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:var(--radius);cursor:pointer;
+  transition:all var(--transition);font-family:inherit;
+  position:relative;overflow:hidden;
+}
+.btn-next::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:translateX(-110%) skewX(-18deg);transition:transform .4s}
+.btn-next:hover::before{transform:translateX(110%) skewX(-18deg)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(43,156,218,.25)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-next:disabled::before{display:none}
+
+/* ── Background ── */
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  nav{padding:0 24px}
+  .container{padding:32px 16px}
+  .service-list{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .summary-grid{grid-template-columns:1fr}
+  .date-grid{gap:3px}
+  .date-day{font-size:12px}
+  .time-grid{grid-template-columns:repeat(3,1fr)}
+  .btn-row{flex-direction:column-reverse}
+  .btn-back,.btn-next{width:100%;text-align:center;justify-content:center}
+  .step-dot{width:26px;height:26px;font-size:10px}
+  .step-label{font-size:9px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-symbol">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M8 2C5.5 2 4 3.5 4 5s1.5 3 4 3 4-1.5 4-3-1.5-3-4-3M4 13c0-1 1-2 2-2s2 1 2 2M10 13c0-1 1-2 2-2s2 1 2 2"/></svg>
+    </div>
+    <span class="logo-text"><b>Ridge</b> & Rowan</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M10 4L6 8l4 4"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page">
+  <div class="container">
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-steps">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        <div class="progress-step" data-step="0">
+          <div class="step-dot active" id="stepDot0">1</div>
+          <span class="step-label active" id="stepLabel0">Service</span>
+        </div>
+        <div class="progress-step" data-step="1">
+          <div class="step-dot" id="stepDot1">2</div>
+          <span class="step-label" id="stepLabel1">Date & Time</span>
+        </div>
+        <div class="progress-step" data-step="2">
+          <div class="step-dot" id="stepDot2">3</div>
+          <span class="step-label" id="stepLabel2">Your Details</span>
+        </div>
+        <div class="progress-step" data-step="3">
+          <div class="step-dot" id="stepDot3">4</div>
+          <span class="step-label" id="stepLabel3">Confirm</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1: Service Selection -->
+    <div class="step-content active" id="step1">
+      <h2 class="step-title">Choose Your Service</h2>
+      <p class="step-subtitle">Select the treatment you're interested in. Not sure? Choose "Consultation" and we'll guide you.</p>
+      <div class="service-list" id="serviceList">
+        <div class="service-option" data-service="consultation" data-duration="30 min" data-price="Free">
+          <div class="check"></div>
+          <div class="service-icon">🩺</div>
+          <div class="service-name">Initial Consultation</div>
+          <div class="service-desc">Comprehensive oral exam, digital X-rays, and personalized treatment plan discussion.</div>
+          <div class="service-duration">30 minutes · Complimentary</div>
+        </div>
+        <div class="service-option" data-service="implants" data-duration="60 min" data-price="$0 consult">
+          <div class="check"></div>
+          <div class="service-icon">🦷</div>
+          <div class="service-name">Dental Implants</div>
+          <div class="service-desc">Evaluate candidacy for implants. Includes 3D CT scan and surgical planning discussion.</div>
+          <div class="service-duration">60 minutes · Consultation fee applies</div>
+        </div>
+        <div class="service-option" data-service="veneers" data-duration="45 min" data-price="$0 consult">
+          <div class="check"></div>
+          <div class="service-icon">✨</div>
+          <div class="service-name">Cosmetic Veneers</div>
+          <div class="service-desc">Smile design consultation with digital preview of your potential results.</div>
+          <div class="service-duration">45 minutes · Consultation fee applies</div>
+        </div>
+        <div class="service-option" data-service="all-on-4" data-duration="60 min" data-price="$0 consult">
+          <div class="check"></div>
+          <div class="service-icon">🏥</div>
+          <div class="service-name">All-on-4 Restoration</div>
+          <div class="service-desc">Full arch restoration evaluation. Includes panoramic imaging and treatment roadmap.</div>
+          <div class="service-duration">60 minutes · Consultation fee applies</div>
+        </div>
+        <div class="service-option" data-service="root-canal" data-duration="45 min" data-price="$0 consult">
+          <div class="check"></div>
+          <div class="service-icon">🔬</div>
+          <div class="service-name">Root Canal Therapy</div>
+          <div class="service-desc">Endodontic evaluation with digital imaging to assess treatment needs.</div>
+          <div class="service-duration">45 minutes · Consultation fee applies</div>
+        </div>
+        <div class="service-option" data-service="cleaning" data-duration="60 min" data-price="From $80">
+          <div class="check"></div>
+          <div class="service-icon">🪥</div>
+          <div class="service-name">Professional Cleaning</div>
+          <div class="service-desc">Deep cleaning, scaling, and polishing. Includes periodontal screening.</div>
+          <div class="service-duration">60 minutes · From $80</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-next" id="nextToStep2" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Date & Time -->
+    <div class="step-content" id="step2">
+      <h2 class="step-title">Select Date & Time</h2>
+      <p class="step-subtitle" id="step2Subtitle">Pick a date and choose from available appointment times.</p>
+      <div class="date-nav">
+        <button class="date-nav-btn" id="prevMonth" aria-label="Previous month">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M10 4L6 8l4 4"/></svg>
+        </button>
+        <div class="date-display">
+          <div class="date-month" id="dateMonth">May 2026</div>
+          <div class="date-year" id="dateYear"></div>
+        </div>
+        <button class="date-nav-btn" id="nextMonth" aria-label="Next month">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M6 4l4 4-4 4"/></svg>
+        </button>
+      </div>
+      <div id="dateGrid"></div>
+      <div class="time-section" id="timeSection" style="display:none">
+        <div class="time-section-title" id="timeSectionTitle">Available Times</div>
+        <div class="time-grid" id="timeGrid"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-back" id="backToStep1">← Back</button>
+        <button class="btn-next" id="nextToStep3" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Patient Details -->
+    <div class="step-content" id="step3">
+      <h2 class="step-title">Your Details</h2>
+      <p class="step-subtitle">We'll use this information to prepare for your visit and send a confirmation.</p>
+      <form id="patientForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="firstName">First Name *</label>
+            <input class="form-input" type="text" id="firstName" placeholder="Your first name" required>
+            <span class="form-error" id="firstNameError">Please enter your first name</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Last Name *</label>
+            <input class="form-input" type="text" id="lastName" placeholder="Your last name" required>
+            <span class="form-error" id="lastNameError">Please enter your last name</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" type="email" id="email" placeholder="you@example.com" required>
+            <span class="form-error" id="emailError">Please enter a valid email address</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number *</label>
+            <input class="form-input" type="tel" id="phone" placeholder="+52 624 XXX XXXX" required>
+            <span class="form-error" id="phoneError">Please enter a valid phone number</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="notes">Notes for the Doctor (Optional)</label>
+          <textarea class="form-input form-textarea" id="notes" placeholder="Any specific concerns, symptoms, or preferences you'd like us to know about..."></textarea>
+        </div>
+        <div class="form-group" style="flex-direction:row;align-items:center;gap:10px;margin-top:8px">
+          <input type="checkbox" id="agreeContact" style="accent-color:var(--primary);width:16px;height:16px">
+          <label for="agreeContact" style="font-size:12px;color:var(--text2);cursor:pointer;font-weight:400;text-transform:none;letter-spacing:0">I agree to be contacted about my appointment via email, phone, or SMS</label>
+        </div>
+      </form>
+      <div class="btn-row">
+        <button class="btn-back" id="backToStep2">← Back</button>
+        <button class="btn-next" id="nextToStep4" disabled>Review Booking →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirmation -->
+    <div class="step-content" id="step4">
+      <h2 class="step-title">Review Your Booking</h2>
+      <p class="step-subtitle">Please verify all details are correct before confirming your appointment.</p>
+      <div class="summary-card">
+        <div class="summary-grid" id="summaryGrid"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-back" id="backToStep3">← Back</button>
+        <button class="btn-next" id="confirmBooking">Confirm Appointment ✓</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Done -->
+    <div class="step-content" id="step5">
+      <div class="confirmation-wrap">
+        <div class="confirmation-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 class="step-title">Appointment Confirmed!</h2>
+        <p class="step-subtitle" style="margin:0 auto 0;max-width:440px">
+          A confirmation has been saved. We'll send you a reminder before your appointment. If you need to reschedule, please call us.
+        </p>
+        <div class="confirmation-details" id="confirmationDetails"></div>
+        <div class="btn-row" style="justify-content:center;margin-top:28px">
+          <a href="index.html" class="btn-next" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">Return to Home →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<canvas id="bgCanvas"></canvas>
+
+<script>
+// ══════════════════════════════════
+// Background Starfield
+// ══════════════════════════════════
+(function(){
+  const c=document.getElementById('bgCanvas'),x=c.getContext('2d');
+  let W,H;
+  function rs(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  rs();window.addEventListener('resize',rs);
+  const stars=Array.from({length:100},()=>({x:Math.random(),y:Math.random(),s:Math.random()*1.1+.2,o:Math.random()*.25+.04,t:Math.random()*Math.PI*2}));
+  (function lp(){
+    x.clearRect(0,0,W,H);
+    const g=x.createRadialGradient(W*.6,H*.5,0,W*.6,H*.5,Math.max(W,H)*.8);
+    g.addColorStop(0,'#0f1428');g.addColorStop(.5,'#0a0e1a');g.addColorStop(1,'#05070f');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+    stars.forEach(s=>{s.t+=.005;const o=s.o*(.6+.4*Math.sin(s.t));x.beginPath();x.arc(s.x*W,s.y*H,s.s,0,Math.PI*2);x.fillStyle=`rgba(200,225,235,${o})`;x.fill()});
+    const v=x.createRadialGradient(W*.5,H*.5,H*.2,W*.5,H*.5,Math.max(W,H)*.7);
+    v.addColorStop(0,'rgba(10,14,26,0)');v.addColorStop(1,'rgba(10,14,26,.55)');
+    x.fillStyle=v;x.fillRect(0,0,W,H);
+    requestAnimationFrame(lp);
+  })();
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){c.style.display='none'}else{c.style.display=''}});
+})();
+
+// ══════════════════════════════════
+// Booking State
+// ══════════════════════════════════
+const state={step:1,service:null,date:null,time:null,firstName:'',lastName:'',email:'',phone:'',notes:'',agreeContact:false};
+let calYear,calMonth;
+
+// ══════════════════════════════════
+// DOM Refs
+// ══════════════════════════════════
+const $=(s)=>document.querySelector(s);const $$=(s)=>document.querySelectorAll(s);
+
+// ══════════════════════════════════
+// Step Navigation
+// ══════════════════════════════════
+function goToStep(n){
+  state.step=n;
+  $$('.step-content').forEach(el=>el.classList.remove('active'));
+  $(`#step${n}`).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  const pct=((state.step-1)/3)*100;
+  $('#progressFill').style.width=`${pct}%`;
+  for(let i=1;i<=4;i++){
+    const dot=$(`#stepDot${i-1}`),label=$(`#stepLabel${i-1}`);
+    dot.className='step-dot';label.className='step-label';
+    if(i<state.step){dot.classList.add('done');label.classList.add('done')}
+    if(i===state.step){dot.classList.add('active');label.classList.add('active')}
+  }
+}
+
+// ══════════════════════════════════
+// Step 1: Service Selection
+// ══════════════════════════════════
+$$('.service-option').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    $$('.service-option').forEach(o=>o.classList.remove('selected'));
+    opt.classList.add('selected');
+    state.service={
+      name:opt.querySelector('.service-name').textContent,
+      desc:opt.querySelector('.service-desc').textContent,
+      duration:opt.querySelector('.service-duration').textContent,
+      id:opt.dataset.service,
+      price:opt.dataset.price
+    };
+    $('#nextToStep2').disabled=false;
+  });
+});
+
+$('#nextToStep2').addEventListener('click',()=>{if(state.service)goToStep(2)});
+
+// ══════════════════════════════════
+// Step 2: Date & Time Picker
+// ══════════════════════════════════
+const now=new Date();
+calYear=now.getFullYear();calMonth=now.getMonth();
+let selectedDate=null,selectedTime=null;
+
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function renderCalendar(){
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();today.setHours(0,0,0,0);
+  $('#dateMonth').textContent=`${MONTHS[calMonth]} ${calYear}`;
+  let html='<div class="date-grid">';
+  DAYS.forEach(d=>{html+=`<div class="date-day-label">${d}</div>`});
+  for(let i=0;i<firstDay;i++){html+='<div class="date-day empty"></div>'}
+  for(let d=1;d<=daysInMonth;d++){
+    const dt=new Date(calYear,calMonth,d);dt.setHours(0,0,0,0);
+    const isPast=dt<today;
+    const isToday=dt.getTime()===today.getTime();
+    const isSelected=selectedDate&&dt.getTime()===selectedDate.getTime();
+    const isWeekend=dt.getDay()===0||dt.getDay()===6;
+    let cls='date-day';
+    if(isPast)cls+=' past';
+    if(isToday)cls+=' today';
+    if(isSelected)cls+=' selected';
+    if(isWeekend)cls+=' weekend';
+    html+=`<div class="${cls}" data-day="${d}" ${isPast?'':''}>${d}</div>`;
+  }
+  html+='</div>';
+  $('#dateGrid').innerHTML=html;
+
+  $$('.date-day:not(.empty):not(.past)').forEach(day=>{
+    day.addEventListener('click',()=>{
+      const d=parseInt(day.dataset.day);
+      selectedDate=new Date(calYear,calMonth,d);
+      selectedDate.setHours(0,0,0,0);
+      selectedTime=null;
+      renderCalendar();
+      renderTimeSlots();
+    });
+  });
+}
+
+function renderTimeSlots(){
+  if(!selectedDate){$('#timeSection').style.display='none';$('#nextToStep3').disabled=true;return}
+  $('#timeSection').style.display='block';
+  const dayName=DAYS[selectedDate.getDay()];
+  $('#timeSectionTitle').textContent=`Available Times — ${dayName}, ${MONTHS[selectedDate.getMonth()]} ${selectedDate.getDate()}`;
+
+  const dayOfWeek=selectedDate.getDay();
+  const isWeekend=dayOfWeek===0||dayOfWeek===6;
+  const isSat=dayOfWeek===6;
+
+  let slots=[];
+  if(isWeekend&&!isSat){slots=[]}
+  else if(isSat){slots=['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM']}
+  else{slots=['8:00 AM','8:30 AM','9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM']}
+
+  const nowTime=new Date();
+  let html='';
+  slots.forEach(s=>{
+    const [t,ampm]=s.split(' ');
+    const [h,m]=t.split(':').map(Number);
+    let h24=h;
+    if(ampm==='PM'&&h!==12)h24+=12;
+    if(ampm==='AM'&&h===12)h24=0;
+    const slotDate=new Date(selectedDate);slotDate.setHours(h24,m,0,0);
+    const isPast=slotDate<=nowTime;
+    const isSelected=selectedTime===s;
+    let cls='time-slot';
+    if(isPast)cls+=' unavailable';
+    if(isSelected)cls+=' selected';
+    html+=`<div class="${cls}" data-time="${s}">${s}</div>`;
+  });
+  if(slots.length===0)html='<p style="color:var(--text3);font-size:13px;grid-column:1/-1;text-align:center;padding:20px">No appointments available on Sundays. Please select a weekday or Saturday.</p>';
+  $('#timeGrid').innerHTML=html;
+
+  $$('.time-slot:not(.unavailable)').forEach(slot=>{
+    slot.addEventListener('click',()=>{
+      selectedTime=slot.dataset.time;
+      state.date=selectedDate;state.time=selectedTime;
+      renderTimeSlots();
+      $('#nextToStep3').disabled=false;
+    });
+  });
+}
+
+$('#prevMonth').addEventListener('click',()=>{
+  const d=new Date(calYear,calMonth-1,1);
+  const today=new Date();today.setHours(0,0,0,0);
+  if(d<new Date(today.getFullYear(),today.getMonth(),1))return;
+  calMonth--;if(calMonth<0){calMonth=11;calYear--}
+  selectedDate=null;selectedTime=null;
+  renderCalendar();$('#timeSection').style.display='none';$('#nextToStep3').disabled=true;
+});
+$('#nextMonth').addEventListener('click',()=>{
+  calMonth++;if(calMonth>11){calMonth=0;calYear++}
+  selectedDate=null;selectedTime=null;
+  renderCalendar();$('#timeSection').style.display='none';$('#nextToStep3').disabled=true;
+});
+
+$('#nextToStep3').addEventListener('click',()=>{
+  if(selectedDate&&selectedTime)goToStep(3);
+});
+
+$('#backToStep1').addEventListener('click',()=>goToStep(1));
+$('#backToStep2').addEventListener('click',()=>goToStep(2));
+
+// ══════════════════════════════════
+// Step 3: Patient Details
+// ══════════════════════════════════
+const inputs={
+  firstName:$('#firstName'),lastName:$('#lastName'),
+  email:$('#email'),phone:$('#phone'),notes:$('#notes'),agreeContact:$('#agreeContact')
+};
+
+function validateField(input,errorEl){
+  const v=input.value.trim();
+  if(input.id==='email'){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
+  if(input.id==='phone'){return v.length>=7}
+  if(input.id==='agreeContact'){return input.checked}
+  return v.length>0;
+}
+
+function validateStep3(){
+  let valid=true;
+  ['firstName','lastName','email','phone'].forEach(id=>{
+    const input=$(`#${id}`),error=$(`#${id}Error`);
+    if(validateField(input,error)){input.classList.remove('error');error.classList.remove('visible')}
+    else{input.classList.add('error');error.classList.add('visible');valid=false}
+  });
+  if(!$('#agreeContact').checked){$('#agreeContact').style.outline='2px solid var(--danger)';valid=false}
+  else{$('#agreeContact').style.outline=''}
+  return valid;
+}
+
+Object.entries(inputs).forEach(([key,el])=>{
+  if(!el)return;
+  el.addEventListener('input',()=>{
+    if(key==='agreeContact'){$('#agreeContact').style.outline=''}
+    else{const err=$(`#${key}Error`);if(err&&validateField(el,err)){el.classList.remove('error');err.classList.remove('visible')}}
+    checkStep3Complete();
+  });
+  if(el.type==='checkbox')el.addEventListener('change',checkStep3Complete);
+});
+
+function checkStep3Complete(){
+  const ok=inputs.firstName.value.trim()&&inputs.lastName.value.trim()&&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs.email.value.trim())&&
+    inputs.phone.value.trim().length>=7&&inputs.agreeContact.checked;
+  $('#nextToStep4').disabled=!ok;
+}
+
+$('#nextToStep4').addEventListener('click',()=>{
+  if(!validateStep3())return;
+  state.firstName=inputs.firstName.value.trim();
+  state.lastName=inputs.lastName.value.trim();
+  state.email=inputs.email.value.trim();
+  state.phone=inputs.phone.value.trim();
+  state.notes=inputs.notes.value.trim();
+  state.agreeContact=inputs.agreeContact.checked;
+  renderSummary();
+  goToStep(4);
+});
+
+$('#backToStep3').addEventListener('click',()=>goToStep(3));
+
+// ══════════════════════════════════
+// Step 4: Summary
+// ══════════════════════════════════
+function renderSummary(){
+  const fmtDate=selectedDate?`${DAYS[selectedDate.getDay()]}, ${MONTHS[selectedDate.getMonth()]} ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`:'—';
+  $('#summaryGrid').innerHTML=`
+    <div class="summary-item"><div class="summary-label">Service</div><div class="summary-value">${state.service.name}</div></div>
+    <div class="summary-item"><div class="summary-label">Duration</div><div class="summary-value">${state.service.duration}</div></div>
+    <div class="summary-item"><div class="summary-label">Date</div><div class="summary-value">${fmtDate}</div></div>
+    <div class="summary-item"><div class="summary-label">Time</div><div class="summary-value">${state.time||'—'}</div></div>
+    <div class="summary-item"><div class="summary-label">Patient</div><div class="summary-value">${state.firstName} ${state.lastName}</div></div>
+    <div class="summary-item"><div class="summary-label">Email</div><div class="summary-value">${state.email}</div></div>
+    <div class="summary-item"><div class="summary-label">Phone</div><div class="summary-value">${state.phone}</div></div>
+    ${state.notes?`<div class="summary-item" style="grid-column:1/-1"><div class="summary-label">Notes</div><div class="summary-value">${state.notes}</div></div>`:''}
+  `;
+}
+
+$('#confirmBooking').addEventListener('click',()=>{
+  // Save to localStorage
+  const booking={
+    id:'RRD-'+Date.now().toString(36).toUpperCase(),
+    service:state.service,
+    date:selectedDate.toISOString(),
+    time:state.time,
+    patient:{firstName:state.firstName,lastName:state.lastName,email:state.email,phone:state.phone},
+    notes:state.notes,
+    createdAt:new Date().toISOString()
+  };
+  const bookings=JSON.parse(localStorage.getItem('rrd_bookings')||'[]');
+  bookings.push(booking);
+  localStorage.setItem('rrd_bookings',JSON.stringify(bookings));
+
+  renderConfirmation(booking);
+  goToStep(5);
+  updateProgressDone();
+});
+
+function updateProgressDone(){
+  for(let i=0;i<4;i++){$(`#stepDot${i}`).classList.add('done');$(`#stepLabel${i}`).classList.add('done')}
+  $('#progressFill').style.width='100%';
+}
+
+function renderConfirmation(booking){
+  const d=new Date(booking.date);
+  $('#confirmationDetails').innerHTML=`
+    <div class="conf-detail"><span class="conf-detail-label">Booking ID</span><span class="conf-detail-value" style="color:var(--accent)">${booking.id}</span></div>
+    <div class="conf-detail"><span class="conf-detail-label">Service</span><span class="conf-detail-value">${booking.service.name}</span></div>
+    <div class="conf-detail"><span class="conf-detail-label">Date</span><span class="conf-detail-value">${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}</span></div>
+    <div class="conf-detail"><span class="conf-detail-label">Time</span><span class="conf-detail-value">${booking.time}</span></div>
+    <div class="conf-detail"><span class="conf-detail-label">Patient</span><span class="conf-detail-value">${booking.patient.firstName} ${booking.patient.lastName}</span></div>
+    <div class="conf-detail"><span class="conf-detail-label">Duration</span><span class="conf-detail-value">${booking.service.duration}</span></div>
+  `;
+}
+
+// ══════════════════════════════════
+// Init
+// ══════════════════════════════════
+renderCalendar();
+$('#nextToStep2').disabled=true;
+$('#nextToStep3').disabled=true;
+$('#nextToStep4').disabled=true;
+
+// Enable step nav from step dots
+$$('.progress-step').forEach(step=>{
+  step.addEventListener('click',()=>{
+    const target=parseInt(step.dataset.step)+1;
+    if(target<state.step)goToStep(target);
+  });
+  step.style.cursor='pointer';
+});
+</script>
+</body>
+</html>

@@ -918,4 +918,138 @@ function drawOverlay() {
   // Tick marks
   oc.strokeStyle = 'rgba(43,156,218,0.7)';
   oc.lineWidth = 1.2;
-  oc.
+  oc.beginPath();
+  oc.moveTo(0, scanY);
+  oc.lineTo(12, scanY);
+  oc.stroke();
+  oc.beginPath();
+  oc.moveTo(OW, scanY);
+  oc.lineTo(OW - 12, scanY);
+  oc.stroke();
+
+  // Readout
+  oc.font = '500 7px monospace';
+  oc.fillStyle = 'rgba(43,156,218,0.6)';
+  oc.textAlign = 'left';
+  oc.fillText(`Y:${Math.max(0, Math.round(scanY)).toString().padStart(4, '0')}`, 16, scanY - 6);
+
+  // Vignette overlay
+  const vg = oc.createRadialGradient(OW * 0.5, OH * 0.45, OH * 0.18, OW * 0.5, OH * 0.45, OH * 0.7);
+  vg.addColorStop(0, 'rgba(10,14,26,0)');
+  vg.addColorStop(1, 'rgba(10,14,26,.4)');
+  oc.fillStyle = vg;
+  oc.fillRect(0, 0, OW, OH);
+
+  // Annotations
+  annotations.forEach((a, i) => {
+    const ax = a.rx * OW, ay = a.ry * OH;
+    const phase = Math.sin(T * 0.5 + i * 0.8);
+    const ao = 0.22 + 0.08 * phase;
+    const llen = OW * 0.12;
+    const ex = a.side === 'right' ? ax + llen : ax - llen;
+    const ey = ay;
+
+    oc.beginPath();
+    oc.arc(ax, ay, 2.4, 0, Math.PI * 2);
+    oc.fillStyle = `rgba(43,156,218,${ao * 2.2})`;
+    oc.fill();
+
+    const pr = 5 + 3 * (0.5 + 0.5 * Math.sin(T * 1.1 + i));
+    oc.beginPath();
+    oc.arc(ax, ay, pr, 0, Math.PI * 2);
+    oc.strokeStyle = `rgba(43,156,218,${ao * 0.8})`;
+    oc.lineWidth = 0.7;
+    oc.stroke();
+
+    oc.beginPath();
+    oc.moveTo(ax, ay);
+    oc.lineTo(ex, ey);
+    oc.strokeStyle = `rgba(43,156,218,${ao})`;
+    oc.lineWidth = 0.8;
+    oc.setLineDash([3, 5]);
+    oc.stroke();
+    oc.setLineDash([]);
+
+    oc.beginPath();
+    oc.moveTo(ex, ey - 5);
+    oc.lineTo(ex, ey + 5);
+    oc.strokeStyle = `rgba(43,156,218,${ao * 1.5})`;
+    oc.lineWidth = 0.9;
+    oc.stroke();
+
+    oc.font = `300 8.5px 'DM Sans',sans-serif`;
+    oc.fillStyle = `rgba(43,156,218,${ao * 1.9})`;
+    const txtX = a.side === 'right' ? ex + 7 : ex - 7;
+    oc.textAlign = a.side === 'right' ? 'left' : 'right';
+    oc.fillText(a.label.toUpperCase(), txtX, ey + 3);
+  });
+
+  // HUD text
+  oc.font = "300 7px 'DM Sans',monospace";
+  oc.fillStyle = 'rgba(43,156,218,.2)';
+  oc.textAlign = 'right';
+  oc.fillText(`DENTAL-SCAN · MOLAR-01 · ${(T * 100).toFixed(0).padStart(5, '0')}ms`, OW - 14, OH - 14);
+  oc.textAlign = 'left';
+  oc.fillStyle = 'rgba(43,156,218,.18)';
+  oc.fillText('DR MODE :: DIAGNOSTIC', 14, OH - 14);
+
+  requestAnimationFrame(drawOverlay);
+}
+
+function init() {
+  resizeOv();
+  window.addEventListener('resize', resizeOv);
+  drawOverlay();
+}
+
+if (img.complete) {
+  init();
+} else {
+  img.addEventListener('load', init);
+  img.addEventListener('error', init);
+}
+
+// ── Mobile Hamburger Menu ──
+(function() {
+  const btn = document.getElementById('navHamburger');
+  const menu = document.getElementById('mobileNav');
+  if (!btn || !menu) return;
+
+  function openMenu() {
+    btn.classList.add('open');
+    menu.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    btn.classList.remove('open');
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', function() {
+    menu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close when any mobile nav link is tapped
+  menu.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close when clicking outside the menu
+  document.addEventListener('click', function(e) {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>

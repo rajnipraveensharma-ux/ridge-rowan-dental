@@ -7,4 +7,7 @@
 /dental-hero-xray.html /dental-hero-xray.html 200
 
 # Redirect root to main page
-/ /index-medical.h
+/ /index-medical.html 302
+
+# Catch-all — serve main page for any unmatched path
+/* /index-medical.html 200
