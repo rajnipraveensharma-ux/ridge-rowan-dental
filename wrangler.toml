@@ -1,0 +1,10 @@
+# Cloudflare Pages configuration
+# Required for TanStack Start SSR (node:* imports)
+compatibility_date = "2025-09-24"
+compatibility_flags = ["nodejs_compat"]
+
+# Build settings for Cloudflare Pages (pre-built output, no build step needed)
+# Configure these in the Cloudflare Pages dashboard:
+#   Build command:      (leave empty — pre-built)
+#   Build output dir:   .
+#   Root dir:           .

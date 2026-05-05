@@ -1,14 +1,2 @@
-# Serve individual pages directly
-/index.html /index.html 200
-/services-implants.html /services-implants.html 200
-/services-veneers.html /services-veneers.html 200
-/privacy-policy.html /privacy-policy.html 200
-/terms-of-service.html /terms-of-service.html 200
-/book.html /book.html 200
-/dental-hero-xray.html /dental-hero-xray.html 200
-
-# Redirect root to main page
-/ /index.html 302
-
-# Catch-all — serve main page for any unmatched path
-/* /index.html 200
+# Ridge & Rowan Dental static assets — no catch-all redirects needed
+# The Functions worker handles SSR routing
